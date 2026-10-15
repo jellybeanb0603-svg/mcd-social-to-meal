@@ -1,0 +1,297 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-14T06:57:47.461854+00:00",
+  "mode": "demo",
+  "demo": true,
+  "context": {
+    "store_id": "DEMO-STORE-NOT-REAL",
+    "channel": "pickup",
+    "service_date": "2026-10-14",
+    "store_name": "演示门店（模拟）",
+    "budget_cents": 3500
+  },
+  "recommendations": [
+    {
+      "note_id": "demo-note-1",
+      "recommendation_id": "demo-note-1",
+      "title": "[演示] 牛肉堡＋中薯＋无糖饮料",
+      "source": {
+        "platform": "synthetic",
+        "url": "https://example.invalid/notes/demo-1",
+        "title": "[演示] 牛肉堡＋中薯＋无糖饮料",
+        "published_at": "2026-10-13T12:00:00+08:00",
+        "retrieved_at": "2026-10-14T12:00:00+08:00",
+        "city": "演示城市"
+      },
+      "claims": {
+        "summary": "模拟作者称搭配清爽；口味属于个人评价。",
+        "advertised_price": {
+          "amount": "29.90",
+          "unit": "yuan",
+          "currency": "CNY"
+        }
+      },
+      "items": [
+        {
+          "name": "经典牛肉堡套餐",
+          "quantity": 1,
+          "options": [
+            {
+              "group": "配餐",
+              "name": "中薯条"
+            },
+            {
+              "group": "饮料",
+              "name": "中杯无糖可乐"
+            }
+          ]
+        }
+      ],
+      "basket": [
+        {
+          "sku_id": "DEMO-BEEF-COMBO",
+          "name": "经典牛肉堡套餐",
+          "quantity": 1,
+          "options": [
+            {
+              "group_id": "DRINK",
+              "option_id": "COLA-ZERO-M",
+              "name": "中杯无糖可乐",
+              "quantity": 1
+            },
+            {
+              "group_id": "SIDE",
+              "option_id": "FRIES-M",
+              "name": "中薯条",
+              "quantity": 1
+            }
+          ]
+        }
+      ],
+      "basket_fingerprint": "64d4667d17d1353706bc24e931429988836bd75d9605bb85783128b439b91398",
+      "mapping_status": "matched",
+      "condition_checks": [
+        {
+          "condition_id": "pickup",
+          "kind": "channel",
+          "description": "到店取餐",
+          "status": "verified",
+          "evidence": "模拟上下文明确 channel=pickup；不是实服务证据。"
+        }
+      ],
+      "quote": {
+        "status": "demo",
+        "total_cents": 2990,
+        "currency": "CNY",
+        "mode": "demo",
+        "freshness_status": "demo",
+        "review_window_seconds": 300,
+        "age_seconds": null,
+        "quoted_at": "2026-10-14T12:00:00+08:00",
+        "expires_at": null
+      },
+      "within_budget": true,
+      "ready_to_order": false,
+      "reasons": [
+        "演示数据仅用于验证流程，不能作为真实在售信息、报价或下单依据。"
+      ]
+    },
+    {
+      "note_id": "demo-note-2",
+      "recommendation_id": "demo-note-2",
+      "title": "[演示] 19.9 元鸡肉堡加餐推荐",
+      "source": {
+        "platform": "synthetic",
+        "url": "https://example.invalid/notes/demo-2",
+        "title": "[演示] 19.9 元鸡肉堡加餐推荐",
+        "published_at": "2026-10-01T12:00:00+08:00",
+        "retrieved_at": "2026-10-14T12:00:00+08:00",
+        "city": "演示城市"
+      },
+      "claims": {
+        "summary": "模拟低价推荐依赖专属优惠；不能把原帖价格当成本人报价。",
+        "advertised_price": {
+          "amount": "19.90",
+          "unit": "yuan",
+          "currency": "CNY"
+        }
+      },
+      "items": [
+        {
+          "name": "香脆鸡肉堡",
+          "quantity": 1
+        },
+        {
+          "name": "中薯条",
+          "quantity": 1
+        },
+        {
+          "name": "中杯无糖可乐",
+          "quantity": 1
+        }
+      ],
+      "basket": [
+        {
+          "sku_id": "DEMO-CHICKEN",
+          "name": "香脆鸡肉堡",
+          "quantity": 1,
+          "options": []
+        },
+        {
+          "sku_id": "DEMO-FRIES-M",
+          "name": "中薯条",
+          "quantity": 1,
+          "options": []
+        },
+        {
+          "sku_id": "DEMO-COLA-ZERO-M",
+          "name": "中杯无糖可乐",
+          "quantity": 1,
+          "options": []
+        }
+      ],
+      "basket_fingerprint": "8e1a62f2aed15d66642d12e42e2a373fae7b7fedc2fe31baa4c1d7cc5b114a6a",
+      "mapping_status": "matched",
+      "condition_checks": [
+        {
+          "condition_id": "coupon",
+          "kind": "coupon",
+          "description": "拥有原帖专属券",
+          "status": "unknown",
+          "evidence": "模拟账户没有提供原帖券的适用证据。"
+        }
+      ],
+      "quote": {
+        "status": "demo",
+        "total_cents": 3950,
+        "currency": "CNY",
+        "mode": "demo",
+        "freshness_status": "demo",
+        "review_window_seconds": 300,
+        "age_seconds": null,
+        "quoted_at": "2026-10-14T12:00:00+08:00",
+        "expires_at": null
+      },
+      "within_budget": false,
+      "ready_to_order": false,
+      "reasons": [
+        "条件“拥有原帖专属券”尚未核实。",
+        "当前应付金额超过预算。",
+        "演示数据仅用于验证流程，不能作为真实在售信息、报价或下单依据。"
+      ]
+    },
+    {
+      "note_id": "demo-note-3",
+      "recommendation_id": "demo-note-3",
+      "title": "[演示] 限时甜品搭配",
+      "source": {
+        "platform": "synthetic",
+        "url": "https://example.invalid/notes/demo-3",
+        "title": "[演示] 限时甜品搭配",
+        "published_at": "2026-09-01T12:00:00+08:00",
+        "retrieved_at": "2026-10-14T12:00:00+08:00",
+        "city": "演示城市"
+      },
+      "claims": {
+        "summary": "模拟推荐提到限时商品；需要当前门店在售证据。",
+        "advertised_price": {
+          "amount": "24.00",
+          "unit": "yuan",
+          "currency": "CNY"
+        }
+      },
+      "items": [
+        {
+          "name": "季节限定甜品",
+          "quantity": 1
+        },
+        {
+          "name": "经典牛肉堡",
+          "quantity": 1
+        }
+      ],
+      "basket": [
+        {
+          "sku_id": "DEMO-BEEF",
+          "name": "经典牛肉堡",
+          "quantity": 1,
+          "options": []
+        }
+      ],
+      "basket_fingerprint": null,
+      "mapping_status": "unavailable",
+      "condition_checks": [
+        {
+          "condition_id": "limited",
+          "kind": "time",
+          "description": "限时商品仍在销售期",
+          "status": "unknown",
+          "evidence": "模拟菜单找不到该限时商品，不能推断仍在售。"
+        }
+      ],
+      "quote": {
+        "status": "not_requested",
+        "total_cents": null,
+        "currency": "CNY",
+        "mode": "demo",
+        "freshness_status": "not_checked",
+        "review_window_seconds": 300,
+        "age_seconds": null
+      },
+      "within_budget": null,
+      "ready_to_order": false,
+      "reasons": [
+        "餐品“季节限定甜品”没有精确匹配的当前商品。",
+        "条件“限时商品仍在销售期”尚未核实。",
+        "演示数据仅用于验证流程，不能作为真实在售信息、报价或下单依据。"
+      ]
+    },
+    {
+      "note_id": "demo-note-4",
+      "recommendation_id": "demo-note-4",
+      "title": "[演示] 套餐推荐但杯型不完整",
+      "source": {
+        "platform": "synthetic",
+        "url": "https://example.invalid/notes/demo-4",
+        "title": "[演示] 套餐推荐但杯型不完整",
+        "published_at": null,
+        "retrieved_at": "2026-10-14T12:00:00+08:00",
+        "city": null
+      },
+      "claims": {
+        "summary": "模拟截图仅看见汉堡和薯条，没有饮料规格证据。"
+      },
+      "items": [
+        {
+          "name": "经典牛肉堡套餐",
+          "quantity": 1,
+          "options": [
+            {
+              "group": "配餐",
+              "name": "中薯条"
+            }
+          ]
+        }
+      ],
+      "basket": [],
+      "basket_fingerprint": null,
+      "mapping_status": "incomplete",
+      "condition_checks": [],
+      "quote": {
+        "status": "not_requested",
+        "total_cents": null,
+        "currency": "CNY",
+        "mode": "demo",
+        "freshness_status": "not_checked",
+        "review_window_seconds": 300,
+        "age_seconds": null
+      },
+      "within_budget": null,
+      "ready_to_order": false,
+      "reasons": [
+        "“经典牛肉堡套餐”需要明确选择“饮料”（至少 1 项）。",
+        "演示数据仅用于验证流程，不能作为真实在售信息、报价或下单依据。"
+      ]
+    }
+  ]
+}
