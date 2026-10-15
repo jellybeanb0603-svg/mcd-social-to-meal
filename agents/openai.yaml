@@ -1,0 +1,4 @@
+interface:
+  display_name: "麦麦种草落地"
+  short_description: "参考种草灵感，按预算搭好主食、小食和饮料，并核验门店官方价格"
+  default_prompt: "使用 $mcd-social-to-meal，参考小红书推荐，从附近麦当劳真实菜单中搭配35元预算内的一餐，只给我一份包含主食、小食、饮料的照着点清单，并核算实际可用优惠。"
