@@ -1,0 +1,35 @@
+{
+  "mode": "demo",
+  "synthetic": true,
+  "store_id": "DEMO-STORE-NOT-REAL",
+  "context": {
+    "channel": "pickup",
+    "service_date": "2026-10-14",
+    "store_name": "演示门店（模拟）"
+  },
+  "currency": "CNY",
+  "quotes": [
+    {
+      "note_id": "demo-note-1",
+      "basket_fingerprint": "64d4667d17d1353706bc24e931429988836bd75d9605bb85783128b439b91398",
+      "status": "success",
+      "total": {
+        "amount": "29.90",
+        "unit": "yuan",
+        "currency": "CNY"
+      },
+      "quoted_at": "2026-10-14T12:00:00+08:00"
+    },
+    {
+      "note_id": "demo-note-2",
+      "basket_fingerprint": "8e1a62f2aed15d66642d12e42e2a373fae7b7fedc2fe31baa4c1d7cc5b114a6a",
+      "status": "success",
+      "total": {
+        "amount": "39.50",
+        "unit": "yuan",
+        "currency": "CNY"
+      },
+      "quoted_at": "2026-10-14T12:00:00+08:00"
+    }
+  ]
+}

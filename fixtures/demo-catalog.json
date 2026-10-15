@@ -1,0 +1,21 @@
+{
+  "mode": "demo",
+  "synthetic": true,
+  "store_id": "DEMO-STORE-NOT-REAL",
+  "context": {"channel": "pickup", "service_date": "2026-10-14", "store_name": "演示门店（模拟）"},
+  "items": [
+    {"sku_id": "DEMO-BEEF-COMBO", "name": "经典牛肉堡套餐", "aliases": [], "available": true, "option_groups": [
+      {"group_id": "SIDE", "name": "配餐", "required": true, "min": 1, "max": 1, "options": [{"option_id": "FRIES-M", "name": "中薯条", "available": true}]},
+      {"group_id": "DRINK", "name": "饮料", "required": true, "min": 1, "max": 1, "options": [{"option_id": "COLA-ZERO-M", "name": "中杯无糖可乐", "available": true}, {"option_id": "COLA-M", "name": "中杯可乐", "available": true}]}
+    ]},
+    {"sku_id": "DEMO-BEEF", "name": "经典牛肉堡", "aliases": [], "available": true, "option_groups": []},
+    {"sku_id": "DEMO-CHICKEN", "name": "香脆鸡肉堡", "aliases": [], "available": true, "option_groups": []},
+    {"sku_id": "DEMO-FRIES-M", "name": "中薯条", "aliases": [], "available": true, "option_groups": []},
+    {"sku_id": "DEMO-COLA-ZERO-M", "name": "中杯无糖可乐", "aliases": ["中杯零糖可乐"], "available": true, "option_groups": []}
+  ],
+  "condition_checks": [
+    {"note_id": "demo-note-1", "condition_id": "pickup", "status": "verified", "evidence": "模拟上下文明确 channel=pickup；不是实服务证据。"},
+    {"note_id": "demo-note-2", "condition_id": "coupon", "status": "unknown", "evidence": "模拟账户没有提供原帖券的适用证据。"},
+    {"note_id": "demo-note-3", "condition_id": "limited", "status": "unknown", "evidence": "模拟菜单找不到该限时商品，不能推断仍在售。"}
+  ]
+}

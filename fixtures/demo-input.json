@@ -1,0 +1,35 @@
+{
+  "mode": "demo",
+  "synthetic": true,
+  "description": "All notes, sources, product availability and prices are invented to demonstrate comparison logic.",
+  "notes": [
+    {
+      "note_id": "demo-note-1",
+      "source": {"platform": "synthetic", "url": "https://example.invalid/notes/demo-1", "title": "[演示] 牛肉堡＋中薯＋无糖饮料", "published_at": "2026-10-13T12:00:00+08:00", "retrieved_at": "2026-10-14T12:00:00+08:00", "city": "演示城市", "synthetic": true},
+      "claims": {"summary": "模拟作者称搭配清爽；口味属于个人评价。", "advertised_price": {"amount": "29.90", "unit": "yuan", "currency": "CNY"}},
+      "items": [{"name": "经典牛肉堡套餐", "quantity": 1, "options": [{"group": "配餐", "name": "中薯条"}, {"group": "饮料", "name": "中杯无糖可乐"}]}],
+      "conditions": [{"condition_id": "pickup", "kind": "channel", "description": "到店取餐"}]
+    },
+    {
+      "note_id": "demo-note-2",
+      "source": {"platform": "synthetic", "url": "https://example.invalid/notes/demo-2", "title": "[演示] 19.9 元鸡肉堡加餐推荐", "published_at": "2026-10-01T12:00:00+08:00", "retrieved_at": "2026-10-14T12:00:00+08:00", "city": "演示城市", "synthetic": true},
+      "claims": {"summary": "模拟低价推荐依赖专属优惠；不能把原帖价格当成本人报价。", "advertised_price": {"amount": "19.90", "unit": "yuan", "currency": "CNY"}},
+      "items": [{"name": "香脆鸡肉堡", "quantity": 1}, {"name": "中薯条", "quantity": 1}, {"name": "中杯无糖可乐", "quantity": 1}],
+      "conditions": [{"condition_id": "coupon", "kind": "coupon", "description": "拥有原帖专属券"}]
+    },
+    {
+      "note_id": "demo-note-3",
+      "source": {"platform": "synthetic", "url": "https://example.invalid/notes/demo-3", "title": "[演示] 限时甜品搭配", "published_at": "2026-09-01T12:00:00+08:00", "retrieved_at": "2026-10-14T12:00:00+08:00", "city": "演示城市", "synthetic": true},
+      "claims": {"summary": "模拟推荐提到限时商品；需要当前门店在售证据。", "advertised_price": {"amount": "24.00", "unit": "yuan", "currency": "CNY"}},
+      "items": [{"name": "季节限定甜品", "quantity": 1}, {"name": "经典牛肉堡", "quantity": 1}],
+      "conditions": [{"condition_id": "limited", "kind": "time", "description": "限时商品仍在销售期"}]
+    },
+    {
+      "note_id": "demo-note-4",
+      "source": {"platform": "synthetic", "url": "https://example.invalid/notes/demo-4", "title": "[演示] 套餐推荐但杯型不完整", "published_at": null, "retrieved_at": "2026-10-14T12:00:00+08:00", "city": null, "synthetic": true},
+      "claims": {"summary": "模拟截图仅看见汉堡和薯条，没有饮料规格证据。"},
+      "items": [{"name": "经典牛肉堡套餐", "quantity": 1, "options": [{"group": "配餐", "name": "中薯条"}]}],
+      "conditions": []
+    }
+  ]
+}
