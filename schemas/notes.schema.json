@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/mcd-social-to-meal/notes.schema.json",
+  "title": "Normalized recommendation notes; extraction is performed by the host",
+  "type": "object",
+  "required": ["mode", "notes"],
+  "properties": {
+    "mode": {"enum": ["demo", "live"]},
+    "synthetic": {"type": "boolean"},
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["note_id", "source", "items", "conditions"],
+        "properties": {
+          "note_id": {"type": "string", "minLength": 1},
+          "source": {
+            "type": "object",
+            "required": ["platform", "title", "retrieved_at"],
+            "properties": {
+              "platform": {"type": "string", "minLength": 1},
+              "url": {"type": ["string", "null"], "description": "Public note URL. Authentication query parameters are removed from reports."},
+              "title": {"type": "string", "minLength": 1},
+              "published_at": {"type": ["string", "null"], "description": "Original observed publication time; never infer an absent date."},
+              "retrieved_at": {"type": "string", "minLength": 1},
+              "city": {"type": ["string", "null"]},
+              "synthetic": {"type": "boolean"}
+            },
+            "additionalProperties": true
+          },
+          "claims": {
+            "type": "object",
+            "description": "Original source assertions; these are not verified catalog facts.",
+            "properties": {
+              "summary": {"type": "string"},
+              "advertised_price": {
+                "type": ["object", "null"],
+                "required": ["amount", "unit", "currency"],
+                "properties": {
+                  "amount": {"type": ["number", "string"]},
+                  "unit": {"enum": ["yuan", "cent"]},
+                  "currency": {"const": "CNY"}
+                },
+                "additionalProperties": true
+              }
+            },
+            "additionalProperties": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["name", "quantity"],
+              "properties": {
+                "name": {"type": "string", "minLength": 1},
+                "quantity": {"type": "integer", "minimum": 1},
+                "sku_id": {"type": "string", "minLength": 1},
+                "options": {
+                  "type": "array",
+                  "description": "Explicit per-unit selections. Do not populate defaults that were absent in the note.",
+                  "items": {
+                    "type": "object",
+                    "required": ["group", "name"],
+                    "properties": {
+                      "group": {"type": "string", "minLength": 1},
+                      "name": {"type": "string", "minLength": 1},
+                      "quantity": {"type": "integer", "minimum": 1},
+                      "group_id": {"type": "string", "minLength": 1},
+                      "option_id": {"type": "string", "minLength": 1}
+                    },
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "conditions": {
+            "type": "array",
+            "description": "Purchase-affecting conditions. Verification belongs to catalog.condition_checks, not source claims.",
+            "items": {
+              "type": "object",
+              "required": ["condition_id", "kind", "description"],
+              "properties": {
+                "condition_id": {"type": "string", "minLength": 1},
+                "kind": {"enum": ["city", "coupon", "time", "membership", "channel", "other"]},
+                "description": {"type": "string", "minLength": 1},
+                "source_excerpt": {"type": "string"}
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}
