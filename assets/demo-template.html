@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>麦麦种草落地 · 推荐对照</title>
+  <style>
+    :root {
+      --ink:#2c281d; --muted:#746e60; --paper:#faf6eb; --card:#fff;
+      --line:#e8e0cf; --yellow:#ffce43; --green:#326744; --green-bg:#edf6ec;
+      --amber:#856013; --amber-bg:#fff5d9; --red:#963e34; --red-bg:#fcefe9;
+      --radius:22px; --app-width:480px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-padding-bottom:190px}
+    body{margin:0;background:#eae6dc;color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;line-height:1.6;-webkit-text-size-adjust:100%}
+    button,input,textarea{font:inherit}
+    button,a,input,summary{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+    button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,textarea:focus-visible{outline:3px solid #006cba;outline-offset:4px}
+    a{color:#31578b;text-underline-offset:3px}
+    .shell{width:100%;max-width:var(--app-width);min-height:100dvh;margin:auto;background:var(--paper);padding:calc(18px + env(safe-area-inset-top,0px)) 18px calc(186px + env(safe-area-inset-bottom,0px));overflow-wrap:anywhere}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .brand{display:flex;gap:9px;align-items:center;font-size:15px;font-weight:800;letter-spacing:.015em}
+    .mark{display:grid;place-items:center;width:34px;height:34px;border-radius:12px;background:var(--yellow);font-size:20px;line-height:1}
+    .demo-badge{display:inline-flex;align-items:center;gap:5px;flex-shrink:0;font-size:11px;font-weight:700;background:#fff0bd;border:1px solid #ead18a;border-radius:999px;padding:5px 9px}
+    .dot{width:5px;height:5px;border-radius:50%;background:#996b10}
+    .hero{display:block;padding:18px 0 12px}
+    .eyebrow{margin:0 0 7px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--green)}
+    h1{font-size:28px;line-height:1.3;letter-spacing:-.04em;margin:0;font-weight:800}
+    .intro{margin:6px 0 12px;color:var(--muted);font-size:13px;line-height:1.7}
+    .context{background:#fffdf6;border:1px solid var(--line);border-radius:16px;padding:10px 14px 0}
+    .context-label{font-size:12px;font-weight:700;color:var(--muted);margin:0 0 6px}
+    #context-rows{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px}
+    .context-row{display:flex;gap:8px;align-items:baseline;min-width:0;font-size:13px;line-height:1.6}
+    .context-row span:first-child{color:var(--muted);flex-shrink:0;font-size:12px}
+    .context-row span:last-child{font-weight:600;min-width:0;overflow-wrap:anywhere}
+    .context-row:first-child{grid-column:1/-1}
+    .context-more{grid-column:1/-1;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+    .context-more summary{display:list-item;min-height:44px;line-height:20px;padding:12px 0;margin-left:15px;cursor:pointer}
+    .context-extra{display:grid;gap:7px;padding-bottom:12px}.context-extra .context-row{font-size:12px}.context-extra .context-row span:last-child{font-weight:400}
+    .notice{display:flex;gap:7px;background:#fff1c8;border:1px solid #eddbac;border-radius:12px;padding:9px 11px;font-size:12px;line-height:1.7;color:#755b25;margin:0 0 18px}
+    .notice strong{font-weight:800}.notice>span{flex-shrink:0}
+    .section-top{display:block;margin:0 0 14px}
+    h2{font-size:21px;margin:0;letter-spacing:-.025em}
+    .section-top p{margin:5px 0 0;color:var(--muted);font-size:12px}
+    .steps{display:none;justify-content:space-between;gap:8px;color:var(--muted);font-size:11px;padding:12px 0 0}
+    .steps b{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:50%;background:#ebe3cf;margin-right:5px;font-size:10px;color:var(--ink)}
+    .cards,.cards.two{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin:0;border:0;padding:0;min-width:0}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:19px 18px 0;display:flex;flex-direction:column;min-width:0;position:relative;transition:border-color .15s,box-shadow .15s}
+    .card.chosen{border-color:#bb9019;box-shadow:0 0 0 2px #ffce4380}
+    .card.unavailable{background:#fcfaf5}
+    .card-heading{display:flex;justify-content:space-between;align-items:start;gap:10px}
+    .card-kicker{font-size:11px;color:var(--muted);letter-spacing:.06em;margin-bottom:4px}
+    .card h3{font-size:19px;line-height:1.45;letter-spacing:-.025em;margin:0;overflow-wrap:anywhere}
+    .status{font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;white-space:nowrap;background:var(--amber-bg);color:var(--amber);margin-top:1px}
+    .status.good{background:var(--green-bg);color:var(--green)}.status.bad{background:var(--red-bg);color:var(--red)}
+    .lede{font-size:13px;line-height:1.7;color:var(--muted);margin:9px 0 0;overflow-wrap:anywhere}
+    .price-box{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:12px;border-radius:16px;background:#faf7ee;margin:16px 0;padding:14px}
+    .price-box>div:last-child{border-left:1px solid #e7dfcb;padding-left:14px}
+    .price-label{font-size:11px;color:var(--muted);margin-bottom:5px}
+    .price-value{font-size:22px;line-height:1.25;letter-spacing:-.03em;font-weight:800}
+    .price-box>div:last-child .price-value{font-size:30px;letter-spacing:-.045em}
+    .price-value.small,.price-box>div:last-child .price-value.small{font-size:17px;letter-spacing:0;line-height:1.6}
+    .price-note{font-size:11px;line-height:1.55;color:var(--muted);margin:5px 0 0;overflow-wrap:anywhere}
+    .card h4{font-size:12px;color:var(--muted);font-weight:500;margin:0 0 5px}
+    .items{list-style:none;padding:0;margin:0 0 10px}
+    .items li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #f0ece2;font-size:14px;line-height:1.6}
+    .item-name{overflow-wrap:anywhere}.spec{font-size:12px;color:var(--muted);display:block;margin-top:2px}.qty{white-space:nowrap;color:var(--muted);font-size:13px}
+    .findings{list-style:none;padding:0;margin:3px 0 14px;font-size:12px;line-height:1.7}
+    .findings li{display:flex;gap:8px;align-items:start;margin:6px 0;overflow-wrap:anywhere}
+    .finding-icon{flex-shrink:0;line-height:1.7;color:var(--green);font-weight:700}.finding-icon.caution{color:var(--amber)}
+    .select-label{display:flex;align-items:center;justify-content:center;gap:9px;background:#fff9e7;border:1px solid #ead9a5;border-radius:14px;min-height:48px;padding:11px 12px;font-size:14px;font-weight:800;cursor:pointer;margin-top:auto}
+    .select-label:has(input:checked){background:var(--yellow);border-color:var(--yellow)}
+    .select-label:has(input:disabled){color:#8b8577;cursor:default;background:#f1eee6;border-color:#e6e0d2}
+    .select-label input{accent-color:#5b4513;width:18px;height:18px;margin:0;flex-shrink:0}
+    .card details{margin:8px -18px 0;padding:0 18px;color:var(--muted);font-size:12px;border-top:1px solid #f0ece2}
+    .card summary{cursor:pointer;min-height:48px;display:list-item;margin-left:16px;padding:14px 0;line-height:20px}
+    .evidence{padding:0 0 14px;overflow-wrap:anywhere;line-height:1.7}.evidence p{margin:0 0 8px}.evidence ul{padding-left:16px;margin:0}
+    .evidence a{display:inline-flex;align-items:center;min-height:44px;padding:5px 0}
+    .basket-details{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin-top:24px;scroll-margin-top:18px;scroll-margin-bottom:185px}
+    .details-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+    .details-heading h2{font-size:18px}.details-heading p{margin:0;color:var(--green);font-size:11px;font-weight:700}
+    .detail-close,.detail-toggle{display:inline-flex;align-items:center;justify-content:center;min-width:48px;min-height:44px;border:1px solid #e9e1cf;background:#fffaf0;border-radius:12px;color:var(--ink);font-size:12px;font-weight:700;padding:8px 12px;cursor:pointer;flex-shrink:0}
+    .detail-toggle:disabled{color:#999182;background:#f7f4ec;cursor:default}
+    .basket-text{font-size:13px;color:var(--muted);margin:0;line-height:1.8}
+    .basket-items{font-size:14px;list-style:none;margin:12px 0 0;padding:0}.basket-items li{padding:7px 0;border-bottom:1px solid #f1ece2;overflow-wrap:anywhere}
+    .basket{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:var(--app-width);padding:12px 18px calc(12px + env(safe-area-inset-bottom,0px));background:#fffdf7;border:1px solid #e6dcc4;border-bottom:0;border-radius:24px 24px 0 0;box-shadow:0 -6px 24px #5a482315;z-index:10}
+    .dock-selection{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px}.dock-selection>div{min-width:0}
+    .basket-label{color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.06em;margin:0 0 2px}
+    .basket h2{font-size:14px;font-weight:800;line-height:1.5;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .basket-right{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center}
+    .basket-total{display:flex;flex-direction:column;gap:2px;font-size:10px;color:var(--muted);min-width:0}
+    .basket-total strong{font-size:26px;letter-spacing:-.045em;line-height:1.25;color:var(--ink);overflow-wrap:anywhere}
+    .action{border:0;border-radius:14px;background:var(--yellow);color:var(--ink);min-height:48px;padding:11px 17px;font-weight:800;font-size:14px;cursor:pointer;white-space:nowrap}
+    .action:disabled{background:#eee8d9;color:#969080;cursor:default}.action:hover:not(:disabled){background:#f6bf2c}
+    .copy-feedback{margin:6px 0 0;font-size:12px;line-height:1.5;color:var(--green)}.copy-feedback:empty{display:none}
+    .copy-fallback{margin-top:16px}.copy-fallback textarea{display:block;width:100%;min-height:220px;border:1px solid var(--line);border-radius:12px;padding:13px;background:#faf8f0;color:var(--ink);font-size:16px;line-height:1.7;resize:vertical;scroll-margin-bottom:190px}
+    .copy-fallback p{font-size:13px;color:var(--muted);margin:0 0 8px}
+    .footer{color:var(--muted);font-size:11px;line-height:1.75;margin-top:24px;border-top:1px solid var(--line);padding-top:16px}.footer p{margin:0}.footer p+p{margin-top:5px}
+    .empty{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;color:var(--muted);font-size:14px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    [hidden]{display:none!important}
+    @media(min-width:481px){.shell{box-shadow:0 0 40px #51482b14}.basket{box-shadow:0 -6px 24px #5a482318}}
+    @media(max-width:359px){.shell{padding-left:14px;padding-right:14px}.brand{font-size:13px;gap:7px}.mark{width:30px;height:30px}.demo-badge{font-size:10px;padding:4px 7px}h1{font-size:26px}.card{padding-left:15px;padding-right:15px}.card details{margin-left:-15px;margin-right:-15px;padding-left:15px;padding-right:15px}.card-heading{gap:7px}.card h3{font-size:18px}.status{font-size:10px;padding:4px 7px}.price-box{gap:10px;padding:12px}.price-box>div:last-child{padding-left:10px}.price-box>div:last-child .price-value{font-size:28px}.basket{padding-left:14px;padding-right:14px}.action{padding-left:13px;padding-right:13px;font-size:13px}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+    @media print{body{background:#fff}.shell{max-width:none;min-height:0;padding:0;box-shadow:none}.select-label,.action,.copy-feedback,.copy-fallback,.steps,.detail-toggle,.detail-close{display:none}.cards{display:block}.card{break-inside:avoid;margin-bottom:15px}.basket{position:static;transform:none;max-width:none;border-radius:0;box-shadow:none;break-inside:avoid}.basket-details[hidden]{display:block!important}.card details{display:block}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar"><div class="brand"><span class="mark" aria-hidden="true">✦</span>麦麦种草落地</div><span class="demo-badge" id="mode-badge"><span class="dot" aria-hidden="true"></span>DEMO · 合成案例</span></header>
+    <section class="hero" aria-labelledby="page-title"><div><h1 id="page-title">种草的这顿，怎么点？</h1><p class="intro">对照推荐与报价，带走一份清楚的餐单。</p></div><aside class="context" aria-label="本次购买条件"><div id="context-rows"></div></aside></section>
+    <div class="notice" id="demo-notice" role="note"><span aria-hidden="true">◉</span><div><strong>合成演示</strong> · 非真实推荐/售价 · 不下单</div></div>
+    <section aria-labelledby="recommendation-title"><div class="section-top"><div><h2 id="recommendation-title">看看这几份点法</h2><p id="candidate-count">先看清条件，再决定想吃哪一份。</p></div><div class="steps" aria-label="比较步骤"><span><b>1</b>看推荐</span><span><b>2</b>核条件</span><span><b>3</b>选这一餐</span></div></div><fieldset class="cards" id="cards"><legend class="sr-only">选择一份购物清单</legend></fieldset><p class="empty" id="empty" hidden>暂时没有可比较的点法。补充推荐内容和门店信息后，再生成对照。</p></section>
+    <section class="basket-details" id="basket-details" aria-labelledby="basket-details-title" hidden><div class="details-heading"><div><p>组成与待确认条件</p><h2 id="basket-details-title">餐单详情</h2></div><button class="detail-close" id="basket-close" type="button">收起</button></div><p class="basket-text" id="basket-context">选择后，这里会列出完整组成与待确认条件。</p><ul class="basket-items" id="basket-items"></ul><div class="copy-fallback" id="copy-fallback" hidden><p>复制不可用时，可选中下面的清单手动复制。</p><textarea id="shopping-list" aria-label="可复制的购物清单" readonly></textarea></div></section>
+    <p class="sr-only" id="selection-announcement" role="status" aria-live="polite"></p>
+    <footer class="footer"><p>原帖价格与当前报价适用条件可能不同；未知条件会保留为待确认。</p><p>麦麦种草落地 · 选择只生成清单</p></footer>
+  </main>
+  <section class="basket" aria-labelledby="basket-title"><div class="dock-selection"><div><p class="basket-label">我的这一餐</p><h2 id="basket-title">先选一份点法</h2></div><button class="detail-toggle" id="basket-toggle" type="button" aria-expanded="false" aria-controls="basket-details" disabled>餐单详情</button></div><div class="basket-right"><div class="basket-total"><span id="basket-price-label">当前报价</span><strong id="basket-total">—</strong></div><button class="action" id="copy-button" type="button" disabled>复制购物清单</button></div><p class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></p></section>
+  <script id="comparison-report" type="application/json">__REPORT_JSON__</script>
+  <script>
+  "use strict";
+  (() => {
+    const report = JSON.parse(document.getElementById("comparison-report").textContent);
+    const currency = "¥";
+    const element = (tag, cls, content) => { const node = document.createElement(tag); if (cls) node.className = cls; if (content !== undefined && content !== null) node.textContent = String(content); return node; };
+    const money = value => typeof value === "number" && Number.isFinite(value) ? currency + value.toFixed(2).replace(/\.00$/, "") : "待核价";
+    const asText = value => value === null || value === undefined ? "" : typeof value === "string" ? value : String(value);
+    const unique = values => [...new Set(values.filter(Boolean))];
+    const list = value => Array.isArray(value) ? value : [];
+    const cents = value => typeof value === "number" && Number.isInteger(value) && value >= 0 ? value / 100 : null;
+    const claimAmount = claim => {
+      if(claim.currency!=="CNY")return null;
+      if(claim.unit==="cent"){if(!/^(?:0|[1-9]\d*)(?:\.0+)?$/.test(String(claim.amount)))return null;const value=Number(claim.amount);return Number.isSafeInteger(value)?cents(value):null;}
+      if(claim.unit!=="yuan" || !/^(?:0|[1-9]\d*)(?:\.\d{1,2})?$/.test(String(claim.amount)))return null;return Number(claim.amount);
+    };
+    const awareTimestamp = value => {
+      if(typeof value!=="string")return NaN;
+      const parts=/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.exec(value);
+      if(!parts)return NaN;
+      const [year,month,day,hour,minute,second]=parts.slice(1).map(Number),leap=year%4===0 && (year%100!==0 || year%400===0),days=[31,leap?29:28,31,30,31,30,31,31,30,31,30,31];
+      if(month<1 || month>12 || day<1 || day>days[month-1] || hour>23 || minute>59 || second>59)return NaN;
+      return Date.parse(value);
+    };
+    const liveQuoteIssue = quote => {
+      if(quote.status!=="verified" && quote.status!=="stale")return "";
+      if(!quote.quoted_at)return "报价缺少核价时间，需要重新核价。";
+      const quoted=awareTimestamp(quote.quoted_at),expires=quote.expires_at==null?null:awareTimestamp(quote.expires_at),now=Date.now();
+      if(!Number.isFinite(quoted) || (expires!==null && !Number.isFinite(expires)))return "报价时间无效或没有明确时区，需要重新核价。";
+      if(quoted-now>30000)return "报价时间晚于本机时间，需要重新核价。";
+      if(expires!==null && expires<=now)return "报价已超过有效期，需要重新核价。";
+      if(now-quoted>300000)return "报价已超过 5 分钟复核窗口，需要重新核价。";
+      if(quote.status==="stale")return "报告中的报价已标记为待复核，需要重新核价。";
+      return "";
+    };
+    const normalizeItem = item => ({name:item.name || item.display_name || item.product_name || "待匹配餐品",quantity:item.quantity || 1,spec:list(item.options).map(option=>option.name+(option.quantity>1?" × "+option.quantity:"")).filter(Boolean).join("、") || item.spec || list(item.specifications).join("、")});
+    const normalize = raw => {
+      const rawContext=raw.context || {};
+      const isDemo=raw.mode!=="live" || raw.demo!==false;
+      const channel={pickup:"到店取餐",delivery:"外送",dine_in:"堂食"}[rawContext.channel] || rawContext.channel || rawContext.order_type || "";
+      const context={store:rawContext.store_name || rawContext.store || "门店待确认",budget:cents(rawContext.budget_cents),preferences:list(rawContext.preferences).length?rawContext.preferences:rawContext.preference || "按推荐组成",channel,quoted_at:rawContext.quoted_at || rawContext.as_of || rawContext.timestamp || rawContext.now || "",service_date:rawContext.service_date || ""};
+      return {demo:isDemo,mode:raw.mode,context,recommendations:list(raw.recommendations).map(candidate=>{
+        const claims=candidate.claims || {}, advertised=claims.advertised_price || {},quote=candidate.quote || {};
+        const mapped=candidate.mapping_status==="matched";
+        const checks=list(candidate.condition_checks),unknown=checks.filter(check=>check.status==="unknown"),contradicted=checks.filter(check=>check.status==="contradicted");
+        const freshnessIssue=liveQuoteIssue(quote);
+        const quoteAccepted=quote.status==="demo" || (quote.status==="verified" && !freshnessIssue);
+        const basket=list(candidate.basket).map(normalizeItem);
+        const original=list(candidate.items).map(normalizeItem);
+        const unresolved=!mapped || !quoteAccepted || unknown.length>0 || contradicted.length>0 || candidate.within_budget===false || (!isDemo && candidate.ready_to_order!==true);
+        let statusLabel=isDemo?"演示报价":"已核验";
+        if(!mapped)statusLabel=candidate.mapping_status==="unavailable"?"餐品不可用":"组成待确认";
+        else if(contradicted.length)statusLabel="条件不符";
+        else if(freshnessIssue)statusLabel="需重新核价";
+        else if(!quoteAccepted)statusLabel="报价待核验";
+        else if(candidate.within_budget===false)statusLabel="超出预算";
+        else if(unresolved)statusLabel="条件待确认";
+        const claimPrice=cents(advertised.amount_cents ?? advertised.price_cents ?? advertised.total_cents) ?? claimAmount(advertised);
+        const findings=checks.filter(check=>check.status==="verified").map(check=>check.description || "已核验一项购买条件");
+        if(quoteAccepted)findings.unshift(isDemo?"报价来自合成菜单与演示核价":"报价已与本次餐篮对应");
+        if(candidate.within_budget===true && quoteAccepted)findings.push("当前报价在预算内");
+        const conditions=unique([freshnessIssue,...contradicted.map(check=>"条件不符："+(check.description||"请核对推荐条件")),...unknown.map(check=>"待确认："+(check.description||"购买条件未提供")),...list(candidate.reasons)]);
+        return {title:candidate.title || "推荐点法",summary:claims.summary || "",source:candidate.source || {},items:mapped?basket:original,items_label:mapped?"当前匹配的组成":"原帖组成（尚未完整匹配）",original_composition:original.map(item=>item.name+(item.spec?"（"+item.spec+"）":"")+" × "+item.quantity).join("；"),original_price:claimPrice,original_price_note:advertised.description || advertised.note || (claimPrice===null?"原帖未提供完整价格":"原帖所述价格，适用条件见下方"),current_price:quoteAccepted?cents(quote.total_cents):null,quoted_at:quote.quoted_at || quote.as_of || context.quoted_at,quote_note:freshnessIssue || (quoteAccepted?(isDemo?"合成核价结果，供演示":"打开页面时通过复核；下单前仍需重新核价"):"尚无可采用的核价结果"),price_missing_label:freshnessIssue?"待重新核价":"待核价",original_quote:quote,findings,conditions,unknowns:[],evidence:checks.map(check=>(check.description||"购买条件")+"："+({verified:"已核验",contradicted:"不符合",unknown:"未确认"}[check.status]||"未确认")+(typeof check.evidence==="string" && check.evidence?"；"+check.evidence:"")),unavailable:!mapped,verified:!unresolved,status_bad:!mapped || contradicted.length>0,status_label:statusLabel,needs_confirmation:unresolved};
+      })};
+    };
+    const model = normalize(report);
+    const recommendations = model.recommendations || [];
+    const context = model.context || {};
+    const isDemo = model.demo !== false;
+    const contextRows = document.getElementById("context-rows");
+    const contextRow = ([label,value]) => { const row=element("div","context-row");row.append(element("span","",label),element("span","",value));return row; };
+    [["门店",context.store || "门店待确认"],["预算",typeof context.budget === "number" ? money(context.budget) : "未设预算"],["方式",context.channel || "待确认"]].forEach(pair=>contextRows.append(contextRow(pair)));
+    const moreConditions=element("details","context-more"),extraConditions=element("div","context-extra");
+    moreConditions.append(element("summary","","更多条件"),extraConditions);
+    [["偏好",Array.isArray(context.preferences) ? context.preferences.join("、") : context.preferences || "按推荐组成"],[context.quoted_at?"核价时间":"购买日期",context.quoted_at || context.service_date || "未提供"]].forEach(pair=>extraConditions.append(contextRow(pair)));
+    contextRows.append(moreConditions);
+    if (!isDemo) { document.getElementById("mode-badge").textContent="推荐对照"; document.getElementById("demo-notice").hidden=true; }
+    else if(model.mode==="mixed"){document.getElementById("mode-badge").textContent="DEMO · 含模拟内容";document.getElementById("demo-notice").textContent="含模拟内容 · 非真实推荐/售价 · 不下单";}
+    const cards = document.getElementById("cards");
+    cards.classList.toggle("two", recommendations.length===2);
+    document.getElementById("candidate-count").textContent=recommendations.length ? "共 " + recommendations.length + " 份点法 · 金额与条件分开核对" : "尚未获得完整的购买条件";
+    document.getElementById("empty").hidden=Boolean(recommendations.length);
+    let selected=null,selectionRevision=0,copyOperation=0;
+    const detailsPanel=document.getElementById("basket-details"),detailsToggle=document.getElementById("basket-toggle"),detailsClose=document.getElementById("basket-close");
+    const scrollToVisible = node => {
+      if(!node || typeof node.scrollIntoView!=="function")return;
+      const reduceMotion=typeof window!=="undefined" && typeof window.matchMedia==="function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      node.scrollIntoView({behavior:reduceMotion?"auto":"smooth",block:"start"});
+    };
+    function showDetails(open,scroll=false){
+      if(!detailsPanel)return;
+      detailsPanel.hidden=!open;
+      if(detailsToggle){detailsToggle.setAttribute("aria-expanded",String(open));detailsToggle.textContent=open?"收起详情":"餐单详情";}
+      if(open && scroll)scrollToVisible(detailsPanel);
+    }
+    if(detailsToggle)detailsToggle.addEventListener("click",()=>{if(!selected)return;const open=detailsPanel?detailsPanel.hidden:false;showDetails(open,open);if(open && detailsClose)detailsClose.focus();});
+    if(detailsClose)detailsClose.addEventListener("click",()=>{showDetails(false);if(detailsToggle)detailsToggle.focus();});
+    const itemText = item => (item.name || "待匹配餐品") + (item.spec ? "（" + item.spec + "）" : "") + " × " + (item.quantity || 1);
+    const conditionText = candidate => unique([liveQuoteIssue(candidate.original_quote || {}),...(candidate.conditions || []),...(candidate.unknowns || [])]);
+    const quoteText = candidate => liveQuoteIssue(candidate.original_quote || {})?"待重新核价":typeof candidate.current_price==="number"?money(candidate.current_price):candidate.price_missing_label || "待核价";
+    const quoteContext = candidate => unique([context.store,context.channel, candidate.quoted_at || context.quoted_at,candidate.quote_note]).join(" · ");
+    const shoppingText = candidate => [isDemo ? "【DEMO · 合成购物清单，不可用于实际下单】" : "【麦麦种草落地 · "+(candidate.needs_confirmation || liveQuoteIssue(candidate.original_quote || {})?"待确认清单":"购物清单")+"】",candidate.title,...(candidate.items || []).map(itemText),"当前报价："+quoteText(candidate),"报价条件："+(quoteContext(candidate)||"待确认"),...(conditionText(candidate).length ? ["购买条件："+conditionText(candidate).join("；")] : []),"原帖参考价："+(typeof candidate.original_price==="number"?money(candidate.original_price):"未注明"),"原帖与当前报价条件可能不同；下单前请重新核价。"].join("\n");
+    function select(candidate,index){
+      selected=candidate;
+      selectionRevision++;
+      document.querySelectorAll(".card").forEach((node,i)=>node.classList.toggle("chosen",i===index));
+      document.getElementById("basket-title").textContent=candidate.title;
+      document.getElementById("basket-context").textContent=conditionText(candidate).length ? conditionText(candidate).join("；") : "组成按当前核验结果保留。下单前请重新核价。";
+      const list=document.getElementById("basket-items");list.replaceChildren();(candidate.items || []).forEach(item=>list.append(element("li","",itemText(item))));
+      document.getElementById("basket-total").textContent=quoteText(candidate);
+      document.getElementById("basket-price-label").textContent=isDemo?"演示报价":"当前报价";
+      document.getElementById("copy-button").disabled=false;
+      if(detailsToggle)detailsToggle.disabled=false;
+      document.getElementById("copy-button").textContent=candidate.needs_confirmation || liveQuoteIssue(candidate.original_quote || {})?"复制待确认清单":"复制购物清单";
+      document.getElementById("shopping-list").value=shoppingText(candidate);
+      document.getElementById("copy-feedback").textContent="";
+      document.getElementById("copy-fallback").hidden=true;
+      document.getElementById("selection-announcement").textContent="已选择"+candidate.title+"，"+quoteText(candidate)+"。购物清单已更新。";
+    }
+    recommendations.forEach((candidate,index)=>{
+      const card=element("article","card"+(candidate.unavailable?" unavailable":""));
+      const top=element("div","card-heading"), heading=element("div");heading.append(element("div","card-kicker","点法 "+String(index+1).padStart(2,"0")),element("h3","",candidate.title || "推荐点法"));
+      const status=element("span","status"+(candidate.status_bad?" bad":candidate.verified?" good":""),candidate.status_label || (candidate.unavailable?"当前不可买":candidate.verified?"已核价":"有条件待确认"));top.append(heading,status);card.append(top);
+      if(candidate.summary)card.append(element("p","lede",candidate.summary));
+      const prices=element("div","price-box");
+      [["原帖参考价",candidate.original_price,candidate.original_price_note||"来自推荐内容","未注明"],[isDemo?"当前演示报价":"页面打开时的报价",candidate.current_price,candidate.quote_note||"以当前配置与券条件为准",candidate.price_missing_label || "待核价"]].forEach(([label,amount,note,missing])=>{const part=element("div");part.append(element("div","price-label",label),element("div","price-value"+(typeof amount!=="number"?" small":""),typeof amount==="number"?money(amount):missing),element("p","price-note",note));prices.append(part);});card.append(prices,element("h4","",candidate.items_label || "这份点法包含"));
+      const items=element("ul","items");(candidate.items || []).forEach(item=>{const row=element("li"),name=element("span","item-name",item.name || "待匹配餐品");if(item.spec)name.append(element("span","spec",item.spec));row.append(name,element("span","qty","× "+(item.quantity || 1)));items.append(row);});card.append(items);
+      const findings=element("ul","findings");(candidate.findings || []).forEach(text=>{const row=element("li");row.append(element("span","finding-icon","✓"),element("span","",text));findings.append(row);});conditionText(candidate).forEach(text=>{const row=element("li");row.append(element("span","finding-icon caution","○"),element("span","",text));findings.append(row);});card.append(findings);
+      const label=element("label","select-label"),radio=element("input");radio.type="radio";radio.name="recommendation";radio.value=String(index);radio.disabled=Boolean(candidate.unavailable);radio.setAttribute("aria-label","选择"+candidate.title);radio.addEventListener("change",()=>select(candidate,index));label.append(radio,element("span","",candidate.unavailable?"暂不能生成购买清单":candidate.needs_confirmation?"查看待确认清单":"选择这份点法"));card.append(label);
+      const details=element("details"),summary=element("summary","","来源与核验依据"),evidence=element("div","evidence");details.append(summary,evidence);
+      const source=candidate.source || {};evidence.append(element("p","",isDemo?"来源：合成推荐案例，无真实小红书帖子。":"来源："+(source.title || "用户提供的推荐内容")));
+      if(!isDemo && source.url){try{const url=new URL(source.url);if(url.protocol==="https:" && !url.username && !url.password){const link=element("a","","查看原推荐");link.href=url.href;link.target="_blank";link.rel="noopener noreferrer";const p=element("p");p.append(link);evidence.append(p);}}catch(_){}}
+      if(candidate.original_composition)evidence.append(element("p","","原帖组成："+candidate.original_composition));
+      if(source.published_at)evidence.append(element("p","","发布时间："+source.published_at));
+      if(candidate.quoted_at || context.quoted_at)evidence.append(element("p","","核价时间："+(candidate.quoted_at || context.quoted_at)));
+      (candidate.evidence || []).forEach(text=>evidence.append(element("p","",text)));card.append(details);cards.append(card);
+    });
+    document.getElementById("copy-button").addEventListener("click",async()=>{
+      if(!selected)return;
+      const candidate=selected;
+      if(liveQuoteIssue(candidate.original_quote || {}))select(candidate,recommendations.indexOf(candidate));
+      const revision=selectionRevision,operation=++copyOperation;
+      const stillCurrent=()=>selected===candidate && selectionRevision===revision && copyOperation===operation;
+      const text=shoppingText(candidate),feedback=document.getElementById("copy-feedback");
+      try{if(!navigator.clipboard || !navigator.clipboard.writeText)throw new Error("clipboard unavailable");await navigator.clipboard.writeText(text);if(!stillCurrent())return;feedback.textContent=isDemo?"已复制合成购物清单。":"购物清单已复制。";}
+      catch(_){if(!stillCurrent())return;showDetails(true);document.getElementById("copy-fallback").hidden=false;const input=document.getElementById("shopping-list");input.value=text;input.focus();input.select();scrollToVisible(input);feedback.textContent="清单已展开，可手动复制。";}
+    });
+  })();
+  </script>
+</body>
+</html>
