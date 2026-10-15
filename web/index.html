@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#faf7ee">
+  <meta name="color-scheme" content="light">
+  <meta name="referrer" content="no-referrer">
+  <title>麦麦种草落地 · 真实推荐与餐单</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a href="#" class="brand" aria-label="麦麦种草落地首页"><span class="brand-mark" aria-hidden="true">m<span>✦</span></span><span>麦麦种草落地<small>从想吃，到这一餐</small></span></a>
+      <span class="live-badge"><span aria-hidden="true"></span>真实数据</span>
+    </header>
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">小红书 × 麦当劳 × 高德</p>
+      <h1 id="hero-title">刷到想吃的，<br>这就安排<span>。</span></h1>
+      <p class="hero-copy">看看大家怎么吃，选好附近的店。<br>用当前菜单，搭配属于你的这一餐。</p>
+      <div class="hero-path" aria-label="使用步骤"><span><b>01</b> 看推荐</span><i aria-hidden="true">↗</i><span><b>02</b> 配餐单</span><i aria-hidden="true">↗</i><span><b>03</b> 去取餐</span></div>
+    </section>
+    <details class="connections" id="connection-details"><summary><span class="connection-dot" id="connection-dot" aria-hidden="true"></span><span id="connection-label">正在检查数据连接</span><span class="connection-more">查看</span></summary><ul id="provider-list"></ul><button class="text-button" type="button" id="refresh-status">重新检查连接</button><p>登录状态与服务可用性分开显示；具体查询以返回结果为准。</p></details>
+
+    <section class="context-card" aria-labelledby="context-title">
+      <div class="section-heading compact"><div><p class="section-kicker">先选好取餐范围</p><h2 id="context-title">今天，在哪里吃？</h2></div><span class="pickup-tag">到店自取</span></div>
+      <form id="location-form">
+        <div class="location-fields"><label class="city-field">城市<input id="city-input" name="city" type="text" value="上海" maxlength="30" autocomplete="address-level2" required></label><label class="origin-field">出发地点<input id="location-input" name="location" type="text" value="南京路步行街" placeholder="建议填写具体地标或门牌" maxlength="120" required></label></div>
+        <div class="context-bottom"><span id="location-summary">输入地点，查询附近可取餐门店</span><button class="button button-dark" id="find-stores" type="submit" disabled>查找门店 <span aria-hidden="true">↗</span></button></div>
+        <label class="geo-picker" id="geo-picker-label" hidden>高德匹配地点，请选择准确的出发点<select id="geo-picker" aria-label="选择高德解析的出发地点"></select></label>
+      </form>
+      <p class="feedback" id="location-feedback" role="status" aria-live="polite"></p>
+      <div class="context-budget"><label class="budget-field">这一餐的预算（可选）<span>¥ <input id="meal-budget-input" inputmode="decimal" type="number" min="0" max="9999" step="0.01" value="35" aria-label="推荐餐单预算，单位元"></span></label><p>主食 + 小食 + 饮料，按整餐官方核价筛选</p></div>
+      <div class="membership-summary" id="membership-summary"><span class="membership-icon" aria-hidden="true">✦</span><div><strong id="membership-label">麦金卡资格待核实</strong><p id="membership-message">生成餐单时查询可用权益；只按官方确认的优惠核价。</p></div></div>
+      <p class="mode-note">取餐方式：<label><input type="radio" name="service-mode" value="pickup" checked> 到店自取</label></p>
+    </section>
+
+    <nav class="jump-nav" aria-label="页面功能"><a href="#recommendations">看推荐</a><a href="#stores-section">选门店</a><a href="#menu-section">配餐单</a><a href="#route-section">去取餐</a></nav>
+
+    <section class="section" id="recommendations" aria-labelledby="recommendations-title">
+      <div class="section-heading"><div><p class="section-kicker">灵感来自小红书</p><h2 id="recommendations-title">这一顿，有什么新想法</h2></div><span class="outline-label">真实笔记</span></div>
+      <form class="search-form" id="search-form"><label class="sr-only" for="keyword-input">搜索小红书推荐</label><span aria-hidden="true">⌕</span><input id="keyword-input" type="search" name="keyword" value="麦当劳" placeholder="搜麦当劳、搭配、早餐…" maxlength="80" required><button id="search-button" type="submit" disabled>搜索</button></form>
+      <div class="search-discovery"><p class="search-discovery-label">今天想怎么吃？<span>点选搜索灵感</span></p><div class="search-suggestions" id="search-suggestions" role="group" aria-label="个性化搜索词条">
+        <button type="button" class="search-chip" data-intent="low_calorie" data-label="减脂期低卡" data-keyword="麦当劳 减脂 低卡 点单" aria-pressed="false" disabled><span aria-hidden="true">🥬</span>减脂期低卡</button>
+        <button type="button" class="search-chip" data-intent="low_budget" data-label="低预算" data-keyword="麦当劳 低预算 省钱 点单" aria-pressed="false" disabled><span aria-hidden="true">🪙</span>低预算</button>
+        <button type="button" class="search-chip" data-intent="fries" data-label="薯条星人" data-keyword="麦当劳 薯条 搭配" aria-pressed="false" disabled><span aria-hidden="true">🍟</span>薯条星人</button>
+        <button type="button" class="search-chip" data-intent="breakfast" data-label="早餐不纠结" data-keyword="麦当劳 早餐 搭配" aria-pressed="false" disabled><span aria-hidden="true">☀️</span>早餐不纠结</button>
+        <button type="button" class="search-chip" data-intent="new_products" data-label="新品尝鲜" data-keyword="麦当劳 新品 测评" aria-pressed="false" disabled><span aria-hidden="true">✨</span>新品尝鲜</button>
+        <button type="button" class="search-chip" data-intent="dessert" data-label="甜品脑袋" data-keyword="麦当劳 甜品 推荐" aria-pressed="false" disabled><span aria-hidden="true">🍦</span>甜品脑袋</button>
+      </div></div>
+      <div class="meal-builder" id="meal-builder"><div class="meal-builder-heading"><span class="meal-builder-icon" aria-hidden="true">✦</span><div><h3>搭配一顿，完整的</h3><p>笔记找灵感 → 本店补齐三样 → 官方核价</p></div></div><div class="meal-builder-roles" aria-label="完整一餐包含"><span>主食</span><b>+</b><span>小食</span><b>+</b><span>饮料</span></div><p class="meal-builder-context" id="meal-builder-context">先选好取餐门店，再按你的偏好搭配完整一餐。</p><p class="meal-budget-summary" id="meal-budget-summary">预算 ¥35.00 · 优先看预算内的完整配餐</p><button class="button button-primary wide" id="generate-meal-plans" type="button" disabled>按预算，搭配完整一餐 <span aria-hidden="true">→</span></button><a class="meal-store-guide" id="meal-store-guide" href="#stores-section">先选择取餐门店 ↗</a><div class="meal-progress" id="meal-progress" hidden><span class="meal-progress-dot" aria-hidden="true"></span><p id="meal-progress-message" role="status" aria-live="polite"></p></div><p class="feedback" id="meal-plan-feedback" role="status" aria-live="polite"></p><p class="fine-print">小红书提供口味灵感，系统从当前门店菜单补齐主食、小食和饮料；补齐的餐品会单独标注。金卡与券优惠以官方实际核算为准，原帖价格和热量不作为本店事实。</p></div>
+      <div class="meal-plan-results" id="meal-plan-results" aria-live="polite" hidden><div class="meal-result-heading"><div><p class="section-kicker">按当前门店生成</p><h3>为你搭好的这一餐</h3></div><span id="meal-plan-count" class="outline-label"></span></div><p class="meta" id="meal-result-meta"></p><div class="meal-offers" id="meal-offers" hidden></div><div id="meal-plan-list" class="meal-plan-list"></div><details class="meal-overbudget" id="meal-overbudget-details" hidden><summary id="meal-overbudget-summary">超预算参考</summary><p class="meal-overbudget-note">这份完整配餐的官方试算超过当前预算，展开后可查看具体搭配、优惠与超出金额。</p><div id="meal-overbudget-list" class="meal-plan-list"></div></details><p class="fine-print" id="meal-result-notice"></p></div>
+      <p class="meta" id="notes-meta">输入关键词，读取实际搜索结果</p>
+      <p class="feedback" id="search-feedback" role="status" aria-live="polite"></p>
+      <div class="note-list" id="note-list"><div class="empty-state"><span class="empty-icon" aria-hidden="true">✦</span><h3>先找找你想吃的</h3><p>推荐内容来自真实笔记；口味和原帖价格，仅供参考。</p></div></div>
+      <article class="selected-note" id="selected-note" hidden><div class="selected-note-heading"><span>已选参考笔记</span><button id="clear-note" class="text-button" type="button">取消参考</button></div><h3 id="selected-note-title"></h3><p id="selected-note-excerpt"></p><button class="text-button" id="reopen-note" type="button">查看正文与原帖 ↗</button><p class="match-summary" id="note-match-summary">选好门店后，可对照当前菜单。</p></article>
+    </section>
+
+    <section class="section" id="stores-section" aria-labelledby="stores-title">
+      <div class="section-heading"><div><p class="section-kicker">麦当劳官方门店</p><h2 id="stores-title">选一家，顺路的店</h2></div><span class="outline-label" id="store-count">等待地点</span></div>
+      <p class="meta" id="stores-meta">门店、菜单和报价会随取餐地点更新。</p>
+      <p class="feedback" id="stores-feedback" role="status" aria-live="polite"></p>
+      <div id="store-list" class="store-list"><div class="empty-state small"><span class="empty-icon" aria-hidden="true">⌖</span><p>填写上方出发地点，查找真实门店。</p></div></div>
+    </section>
+
+    <section class="section" id="menu-section" aria-labelledby="menu-title">
+      <div class="section-heading"><div><p class="section-kicker">在这家店，配一餐</p><h2 id="menu-title">当前菜单</h2></div><button id="refresh-menu" class="text-button" type="button" disabled>刷新</button></div>
+      <p class="meta" id="menu-store">先选择门店，再读取该门店菜单。</p>
+      <div class="menu-tools" id="menu-tools" hidden><a class="menu-plan-shortcut" href="#meal-builder"><span aria-hidden="true">✦</span> 按预算与词条，搭配完整一餐 <span aria-hidden="true">↗</span></a><label class="menu-filter"><span aria-hidden="true">⌕</span><input id="menu-filter" type="search" placeholder="在当前菜单中找餐品" maxlength="80" aria-label="筛选当前菜单"></label><label class="match-filter"><input id="matches-only" type="checkbox" disabled> 只看文中提到</label></div>
+      <p class="feedback" id="menu-feedback" role="status" aria-live="polite"></p>
+      <p class="meta" id="menu-meta"></p>
+      <div id="menu-list" class="menu-list"><div class="empty-state small"><span class="empty-icon" aria-hidden="true">☷</span><p>每份餐品都从所选门店的官方菜单读取。</p></div></div>
+    </section>
+
+    <section class="section cart-section" id="cart-section" aria-labelledby="cart-title">
+      <div class="section-heading"><div><p class="section-kicker">想吃的，都放在这里</p><h2 id="cart-title">我的这一餐 <span id="cart-count">0</span></h2></div><button id="clear-cart" class="text-button" type="button" disabled>清空</button></div>
+      <div class="cart-plan-origin" id="cart-plan-origin" hidden></div>
+      <div id="cart-list" class="cart-list"><div class="empty-state small"><p>从菜单中选餐品，确认规格后加入餐单。</p></div></div>
+      <label class="budget-field">本餐预算（可选）<span>¥ <input id="budget-input" inputmode="decimal" type="number" min="0" max="9999" step="0.01" value="35" aria-label="本餐预算，单位元"></span></label>
+      <div id="quote-panel" class="quote-panel" hidden><div class="quote-value-row"><span>官方试算应付</span><strong id="quote-panel-total">—</strong></div><p class="meta" id="quote-details"></p><p class="quote-benefit-note" id="quote-benefit-note"></p><p class="meta" id="quote-source"></p><p class="budget-feedback" id="budget-feedback"></p><p class="quote-expiry" id="quote-expiry"></p></div>
+      <p class="feedback" id="quote-feedback" role="status" aria-live="polite"></p>
+      <button class="button button-secondary wide" type="button" id="copy-cart" disabled>复制这份购物清单</button><p class="feedback" id="copy-feedback" role="status" aria-live="polite"></p><textarea id="copy-fallback" aria-label="购物清单，可手动选中复制" rows="8" readonly hidden></textarea>
+      <p class="fine-print">菜单标价用于浏览；餐单金额以官方试算结果为准。这里只生成购物清单，请在麦当劳官方渠道确认并下单。</p>
+    </section>
+
+    <section class="section" id="route-section" aria-labelledby="route-title">
+      <div class="section-heading"><div><p class="section-kicker">高德实际步行路线</p><h2 id="route-title">出发，去取餐</h2></div><span class="route-symbol" aria-hidden="true">↗</span></div>
+      <div class="route-card"><p id="route-context">选好出发地点和门店后，规划实际步行路线。</p><button class="button button-secondary wide" id="route-button" type="button" disabled>查询步行路线</button><p class="feedback" id="route-feedback" role="status" aria-live="polite"></p><div id="route-result" hidden><div class="route-stats"><div><strong id="route-distance"></strong><span>步行距离</span></div><div><strong id="route-duration"></strong><span>预计用时</span></div></div><p class="meta" id="route-meta"></p><p class="route-destination" id="route-destination"></p><ol class="route-steps" id="route-steps"></ol><a class="button button-dark wide" id="navigation-link" target="_blank" rel="noopener noreferrer" hidden>在高德地图中导航 ↗</a><p class="fine-print">预计时间来自路线接口；请按实际道路与现场指引出行。</p></div></div>
+    </section>
+    <footer class="footer"><span class="footer-mark" aria-hidden="true">✦</span><p>把一份种草，变成一份清楚的餐单。</p><small>实时查询 · 到店自取 · 自主下单</small></footer>
+  </main>
+
+  <aside class="cart-dock" aria-label="当前餐单与核价"><div class="dock-top"><a href="#cart-section" id="dock-cart-label">我的这一餐 · 0 件 <span aria-hidden="true">⌃</span></a><span id="dock-store">尚未选择门店</span></div><div class="dock-bottom"><div class="dock-price"><span id="dock-price-label">等待官方试算</span><strong id="dock-total">—</strong></div><button class="button button-primary" id="quote-button" type="button" disabled>核算这一餐 <span aria-hidden="true">→</span></button></div></aside>
+
+  <dialog id="note-dialog" aria-labelledby="note-dialog-title"><div class="sheet-handle" aria-hidden="true"></div><div class="sheet-top"><span class="section-kicker">小红书 · 笔记正文</span><button class="icon-button" type="button" id="close-note" aria-label="关闭笔记">×</button></div><div class="sheet-scroll"><h2 id="note-dialog-title"></h2><p class="meta" id="note-dialog-meta"></p><p class="note-body" id="note-dialog-body"></p><a class="external-link" id="note-original" target="_blank" rel="noopener noreferrer" hidden>打开小红书原帖 ↗</a><p class="fine-print">原帖为作者分享，不能证明当前门店在售、券资格或本人支付价格。</p></div><div class="sheet-bottom"><button class="button button-primary wide" type="button" id="use-note">参考这篇，看看菜单 →</button></div></dialog>
+
+  <dialog id="item-dialog" aria-labelledby="item-dialog-title"><div class="sheet-handle" aria-hidden="true"></div><div class="sheet-top"><span class="section-kicker">确认餐品与规格</span><button class="icon-button" type="button" id="close-item" aria-label="关闭餐品">×</button></div><div class="sheet-scroll"><h2 id="item-dialog-title"></h2><p class="meta" id="item-dialog-meta"></p><div id="item-rounds"></div><p class="feedback" id="item-feedback" role="status" aria-live="polite"></p><div class="item-quantity"><span>餐品份数</span><div class="stepper"><button type="button" id="item-minus" aria-label="减少餐品份数">−</button><output id="item-quantity">1</output><button type="button" id="item-plus" aria-label="增加餐品份数">+</button></div></div><p class="fine-print">加入后由官方接口核算完整餐单金额。</p></div><div class="sheet-bottom"><button class="button button-primary wide" id="add-item" type="button">加入我的这一餐</button></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
