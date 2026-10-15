@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "mcd-mcp": {
+      "type": "streamablehttp",
+      "url": "https://mcp.mcd.cn",
+      "headers": {
+        "Authorization": "Bearer ${MCD_MCP_TOKEN}"
+      }
+    },
+    "xiaohongshu-mcp": {
+      "type": "streamablehttp",
+      "url": "http://127.0.0.1:18060/mcp"
+    }
+  }
+}
